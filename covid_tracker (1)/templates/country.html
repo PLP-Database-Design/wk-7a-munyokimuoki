@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ data['country'] }} COVID-19 Stats</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="scrip.js"></script>
+</head>
+<body>
+  <h1>{{ data['country'] }}</h1>
+  <p>Cases: {{ data['cases'] }}</p>
+  <p>Deaths: {{ data['deaths'] }}</p>
+  <p>Recovered: {{ data['recovered'] }}</p>
+  <p>Active: {{ data['active'] }}</p>
+  <p>Today Cases: {{ data['todayCases'] }}</p>
+  <p>Today Deaths: {{ data['todayDeaths'] }}</p>
+  <a href="/">Back to Home</a>
+
+  <h2>Live Statistics Chart</h2>
+  <canvas id="covidChart" width="400" height="200"></canvas>
+  <script>
+    const ctx = document.getElementById('covidChart').getContext('2d');
+    const covidChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Cases', 'Deaths', 'Recovered', 'Active'],
+        datasets: [{
+          label: '{{ data["country"] }} COVID-19 Stats',
+          data: [{{ data["cases"] }}, {{ data["deaths"] }}, {{ data["recovered"] }}, {{ data["active"] }}],
+          backgroundColor: ['blue', 'red', 'green', 'orange']
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+  </script>
+</body>
+</html>

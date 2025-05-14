@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>COVID-19 Global Tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Global COVID-19 Statistics</h1>
+  <div>
+    <p>Total Cases: {{ global_data['cases'] }}</p>
+    <p>Total Deaths: {{ global_data['deaths'] }}</p>
+    <p>Total Recovered: {{ global_data['recovered'] }}</p>
+  </div>
+
+  <h2>Search by Country</h2>
+  <input type="text" id="search" placeholder="Type to search country...">
+  <ul>
+    {% for country in countries %}
+    <li class="country-item"><a href="/country/{{ country['country'] }}">{{ country['country'] }}</a></li>
+    {% endfor %}
+  </ul>
+
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
